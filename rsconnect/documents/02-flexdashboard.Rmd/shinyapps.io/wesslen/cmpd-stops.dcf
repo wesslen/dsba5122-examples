@@ -1,0 +1,13 @@
+name: cmpd-stops
+title: cmpd-stops
+username:
+account: wesslen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 329375
+bundleId: 1336661
+url: https://wesslen.shinyapps.io/cmpd-stops/
+when: 1524597639.67893
+asMultiple: TRUE
+asStatic: FALSE
+ignoredFiles: 01-prep.Rmd

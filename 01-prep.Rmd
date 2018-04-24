@@ -1,0 +1,106 @@
+---
+title: "01-prep"
+author: "Ryan Wesslen"
+date: "4/23/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Load Data
+
+```{r data}
+library(tidyverse); library(lubridate)
+
+# from http://clt-charlotte.opendata.arcgis.com/datasets/c458bca429b542bbb31130c23510628a_7 (pulled 4/23)
+df <- read_csv("./data/Officer_Traffic_Stops.csv")
+```
+
+### Explore
+
+```{r}
+# examine the data
+str(df)
+```
+
+How many were stopped? This will be our dependent variable
+
+```{r}
+df %>% 
+  count(Result_of_Stop)
+```
+
+What's the timeframe?
+
+First, we need to clean up our date field.
+
+```{r}
+# replace "/" with "-"
+df$Month_of_Stop <- gsub("/","-",df$Month_of_Stop)
+# add in a day
+df$Month_of_Stop <- paste0(df$Month_of_Stop,"-01")
+# created a date field
+df$Date <- lubridate::ymd(df$Month_of_Stop)
+```
+
+```{r}
+# first plot
+df %>%
+  count(Date) %>%
+  ggplot(aes(x = Date, y = n)) +
+  geom_line()
+```
+
+Let's now expand.
+
+```{r}
+df %>%
+  count(Date, CMPD_Division) %>%
+  filter(!is.na(CMPD_Division)) %>%
+  ggplot(aes(x = Date, y = n)) +
+  geom_line() +
+  scale_x_date(date_labels = "%b %y") +
+  labs(x = "Month of Stop",
+       y = "Number of Stops",
+       title = "CMPD Traffic Stops by Month") +
+  facet_wrap(.~CMPD_Division)
+```
+
+### Driver Information
+
+```{r}
+# driver gender and race
+df %>%
+  count(Driver_Gender, Driver_Race) %>%
+  ggplot(aes(x = Driver_Gender, y = n, fill = Driver_Race)) +
+  geom_col()
+
+# driver gender, race, and ethnicity
+df %>%
+  count(Driver_Gender, Driver_Race, Driver_Ethnicity) %>%
+  ggplot(aes(x = Driver_Gender, y = n, fill = Driver_Race)) +
+  geom_col() +
+  facet_wrap(~Driver_Ethnicity)
+
+```
+
+### Age
+
+```{r}
+ggplot(df, aes(x = Driver_Age)) +
+  geom_histogram(bins = 25)
+
+# or use a geom_freqpoly()
+ggplot(df, aes(x = Driver_Age)) +
+  geom_freqpoly() +
+  labs(x = "Driver Age",
+       y = "Number of Traffic Stops")
+
+# age by ethnicity
+ggplot(df, aes(x = Driver_Age, fill = Driver_Ethnicity)) +
+  geom_density(alpha = 0.2, adjust = 2)
+
+```
+
