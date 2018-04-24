@@ -14,18 +14,18 @@ install.packages(pkgs)
 
 ## Scripts
 
-Preparation [R](/01-prep.R) / [Rmd](/01-prep.Rmd) / [HTML](/01-prep.html)
+Preparation: [R](/01-prep.R) / [Rmd](/01-prep.Rmd) / [HTML](/01-prep.html)
 
-Flexdashboard [Rmd](/02-flexdashboard.Rmd) [wesslen.shinyapps.io](https://wesslen.shinyapps.io/cmpd-stops)
+Flexdashboard: [Rmd](/02-flexdashboard.Rmd) / [wesslen.shinyapps.io](https://wesslen.shinyapps.io/cmpd-stops)
 
-Shinydashboard [R](/app.R)
+Shinydashboard: [R](/app.R)
 
 
 ## Shiny Examples
 
 Want more? See this <https://github.com/rstudio/shiny-examples>.
 
-Check out [shinydashboard](https://rstudio.github.io/shinydashboard/) or 
+Check out [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) or [shinydashboard](https://rstudio.github.io/shinydashboard/). 
 
 See [shinyapps.io](http://www.shinyapps.io/) to learn how to deploy via RSConnect.
 

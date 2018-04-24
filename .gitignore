@@ -1,6 +1,9 @@
 # Stupid Mac file
 .DS_Store
 
+# RSConnect
+/rsconnect/documents/02-flexdashboard.Rmd/shinyapps.io/wesslen/cmpd-stops.dcf
+
 # History files
 .Rhistory
 .Rapp.history
